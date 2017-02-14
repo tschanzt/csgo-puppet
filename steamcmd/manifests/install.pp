@@ -13,8 +13,12 @@ class steamcmd::install (
 	package { $steam_dependency:
 		ensure => latest,
 	}
+
+    package { 'screen';
+        ensure => installed,}
+
 	archive { 'stcmd':
-		user => 'steam',
+		user => 'eevent',
 		checksum => false,
 		target => $install_directory,
 		ensure => present,
@@ -24,7 +28,7 @@ class steamcmd::install (
 	exec { "${install_directory}/steamcmd.sh +runscript conf &":
 		timeout => 0,
 		require => Archive['stcmd'],
-		user => 'steam',
+		user => 'eevent',
 		cwd => $install_directory,
 	}
 }

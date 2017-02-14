@@ -4,24 +4,43 @@ class csgo::install (
 	$game_type	= $::csgo::game_type,
 	$game_mode	= $::csgo::game_mode,
 	$mapgroup	= $::csgo::mapgroup,
+    $instances = [0,1,2,3,4,5,6,7,8,9,10,11]
 	) {
-	$str = "#!/bin/bash
-$(ln -s \$1/Counter-Strike\\ Global\\ Offensive\\ Beta\\ -\\ Dedicated\\ Server \$1/nospace)
-"
-	file { "${srcds_path}/syml.sh":
-		ensure => present,
-		owner => 'steam',
-		content => $str,
-		mode => '0555',
-	}
-	exec { "${srcds_path}/syml.sh ${srcds_path}": 
-		user => 'steam',
-		require => File["${srcds_path}/syml.sh"],
-		unless => "/usr/bin/test -f ${srcds_path}/nospace",
-	}
-	exec { "${srcds_path}/nospace/srcds_run -game csgo -console -usercon +game_type ${game_type} +game_mode ${game_mode} +mapgroup ${mapgroup} +map ${map} &":
-		user => 'steam',
-		unless => "/usr/bin/pgrep -u steam -f srcds",
-		require => Exec["${srcds_path}/syml.sh ${srcds_path}"],
-	}
-}
+    archive { 'stcmd':
+        user => 'eevent',
+        checksum => false,
+        target => $game_directory/csgo/cfg,
+        ensure => present,
+        url => 'https://gfx.esl.eu/media/counterstrike/csgo/downloads/configs/csgo_esl_serverconfig.zip',
+        src_target => '/tmp'
+    }
+
+    archive { 'csay':
+        user => 'eevent',
+        checksum => false,
+        target => $gamedirectory/csgo/addons/,
+        ensure => present,
+        url => 'http://www.esport-tools.net/download/CSay-CSGO.zip',
+        src_target => '/tmp'
+    }
+
+    file {'${game_directory}/csgo/cfg/autoexec.cfg',
+        replace => true,
+        source = 'puppet:///modules/csgo/csgo/files/autoexec.cfg'
+        }
+
+    file {'${game_directory}/csgo/cfg/server.cfg',
+        replace => true,
+        source = 'puppet:///modules/csgo/csgo/files/server.cfg'
+        }
+
+    $instances.each |int $instance| {
+        $gameport = 27015 + (100*$instance)
+        $tvport = 27020 + (100*$instance)
+        file {'./start${instance}.sh':
+            content => template('csgo/templates/start.sh.erb'),
+            owner => eevent,
+            group => eevent,
+            mode => 744,
+        }
+    }
