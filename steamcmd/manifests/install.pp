@@ -14,8 +14,11 @@ class steamcmd::install (
 		ensure => latest,
 	}
 
-    package { 'screen';
-        ensure => installed,}
+    package { 'screen':
+        ensure => installed}
+
+    package { 'unzip':
+	ensure => installed}
 
 	archive { 'stcmd':
 		user => 'eevent',
@@ -23,7 +26,8 @@ class steamcmd::install (
 		target => $install_directory,
 		ensure => present,
 		url => $url,
-		src_target => '/tmp'
+		src_target => '/tmp',
+		tar_command => 'tar'
 	}
 	exec { "${install_directory}/steamcmd.sh +runscript conf &":
 		timeout => 0,

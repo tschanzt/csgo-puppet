@@ -4,6 +4,7 @@ class steamcmd::config (
 	$password 		= $steamcmd::password,
 	$app_id 		= $steamcmd::app_id,
 	$config_path 		= $steamcmd::config_path,
+	$game_directory         = $steamcmd::game_directory
 	) {
 	user { 'eevent':
 		ensure => present,
