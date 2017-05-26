@@ -1,1 +1,1 @@
-screen -S csgo<%= @instance -%> ./srcds_run -game csgo -console -usercon -tickrate 128 +game_type 0 +game_mode 1 +mapgroup mg_active +map de_inferno +ip <%= @ipaddress -%> +port <%= @gameport -%> +tv_port <%= @tvport -%>
+screen -S csgo<%= @instance -%> ./srcds_run -game csgo -console -usercon -tickrate 128 +game_type 0 +game_mode 1 +mapgroup mg_active +map de_inferno +ip <%= @ipaddress -%> +port <%= @gameport -%> +tv_port <%= @tvport -%> +tv_enable 1
