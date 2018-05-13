@@ -6,8 +6,6 @@ class steamcmd (
 	$app_id			= $::steamcmd::params::app_id,
 	$config_path		= $::steamcmd::params::config_path,
 	) inherits steamcmd::params {
-    require puppetlabs-stdlib
-    require camptocamp-archive
 	contain steamcmd::config
 	contain steamcmd::install
 }

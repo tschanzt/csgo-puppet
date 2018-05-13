@@ -5,6 +5,5 @@ class csgo (
 	$map		= $::csgo::params::map,
 	$mapgroup	= $::csgo::params::mapgroup,
 	) inherits csgo::params {
-    require puppetlabs-stdlib
 	contain csgo::install
 }
