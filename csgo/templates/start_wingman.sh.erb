@@ -1,0 +1,1 @@
+screen -S csgowingman<%= @instance -%> ./srcds_run -game csgo -console -usercon -tickrate 128 +game_type 0 +game_mode 2 +mapgroup mg_active +map de_inferno +ip <%= @ipaddress -%> +port <%= @gameport -%> +tv_port <%= @tvport -%> +tv_enable 1 +sv_setsteamaccount <%= @token -%>
