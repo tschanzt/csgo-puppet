@@ -50,19 +50,20 @@ class csgo::install (
 }
 
     $codefile = $::hostname?{
-    'eevent-dns-1': file(csgo/eevent-csgo-1.txt),
-    'eevent-dns-2': file(csgo/eevent-csgo-2.txt),
-    'eevent-csgo-1': file(csgo/eevent-csgo-3.txt),
-    'eevent-csgo-2': file(csgo/eevent-csgo-4.txt),
-    'eevent-csgo-3': file(csgo/eevent-csgo-5.txt),
-    'eevent-csgo-4': file(csgo/eevent-csgo-6.txt),
+    'eevent-dns-1'=> file(csgo/eevent-csgo-1.txt),
+    'eevent-dns-2'=> file(csgo/eevent-csgo-2.txt),
+    'eevent-csgo-1'=> file(csgo/eevent-csgo-3.txt),
+    'eevent-csgo-2'=> file(csgo/eevent-csgo-4.txt),
+    'eevent-csgo-3'=> file(csgo/eevent-csgo-5.txt),
+    'eevent-csgo-4'=> file(csgo/eevent-csgo-6.txt),
 }
-    $codes = $codefile.split()
+    $codes = $codefile.split('\n')
 
     $bla = [0,1,2,3,4,5,6,7]
     each($bla) |$instance| {
         $gameport = 27015 + (100*$instance)
         $tvport = 27020 + (100*$instance)
+        $token = $codes[$instance]
         file {"${game_directory}/start${instance}.sh":
             content => template('csgo/start.sh.erb'),
             owner => eevent,
