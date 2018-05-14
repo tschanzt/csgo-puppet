@@ -52,10 +52,10 @@ class csgo::install (
     $codefile = $::hostname?{
     'eevent-dns-1'=> file('csgo/eevent-csgo-1.txt'),
     'eevent-dns-2'=> file('csgo/eevent-csgo-2.txt'),
-    'eevent-csgo-1'=> file('csgo/eevent-csgo-3.txt'),
-    'eevent-csgo-2'=> file('csgo/eevent-csgo-4.txt'),
-    'eevent-csgo-3'=> file('csgo/eevent-csgo-5.txt'),
-    'eevent-csgo-4'=> file('csgo/eevent-csgo-6.txt'),
+    'eevent1'=> file('csgo/eevent-csgo-3.txt'),
+    'eevent2'=> file('csgo/eevent-csgo-4.txt'),
+    'eevent3'=> file('csgo/eevent-csgo-5.txt'),
+    'eevent4'=> file('csgo/eevent-csgo-6.txt'),
 }
     $codes = $codefile.split('\n')
 
