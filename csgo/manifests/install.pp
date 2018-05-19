@@ -70,5 +70,12 @@ class csgo::install (
             group => eevent,
             mode => '774',
         }
+        file {"${game_directory}/start-wingman${instance}.sh":
+            content => template('csgo/start_wingman.sh.erb'),
+            owner => eevent,
+            group => eevent,
+            mode => '774',
+        }
+
     }
 }
