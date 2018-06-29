@@ -4,6 +4,6 @@ class steamcmd::params {
 	$url 			= 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz'
 	$login			= 'anonymous'
 	$password		= undef
-	$app_id			= '740'
+	$app_id			= '730'
 	$config_path		= "${install_directory}/conf"
 }
