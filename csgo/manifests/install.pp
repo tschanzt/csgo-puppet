@@ -21,25 +21,47 @@ class csgo::install (
 	user => 'eevent',
 	require => Archive['cfg']
    }
+    archive { 'metamod':
+        user => 'eevent',
+        checksum => false,
+        target => "${game_directory}/csgo/",
+        ensure => present,
+        url => 'https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git966-linux.tar.gz',
+        src_target => '/tmp',
+    }
     archive { 'sm':
         user => 'eevent',
         checksum => false,
-        target => "${game_directory}/csgo/csgo",
+        target => "${game_directory}/csgo/addons",
         ensure => present,
         url => 'https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6259-linux.tar.gz',
         src_target => '/tmp',
-        strip_components => 1,
     }
     archive { 'pugsetup':
         user => 'eevent',
         checksum => false,
-        target => "${game_directory}/csgo/csgo",
+        target => "${game_directory}/csgo",
         ensure => present,
         url => 'https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip',
+        follow_redirects => true,
         src_target => '/tmp',
         strip_components => 1,
         extension => 'zip'
     }
+    exec {'mv csgo/pugsetup_2.0.5/cfg/* csgo/cfg/':
+        path => '/usr/bin:/usr/sbin:/bin',
+        cwd => $game_directory,
+        user => 'eevent',
+        require => Archive['pugsetup']
+   }
+
+    exec {'mv csgo/pugsetup_2.0.5/addons/* csgo/addons/':
+        path => '/usr/bin:/usr/sbin:/bin',
+        cwd => $game_directory,
+        user => 'eevent',
+        require => Archive['pugsetup']
+   }
+
     file {"${game_directory}/csgo/cfg/autoexec.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/autoexec.cfg'
