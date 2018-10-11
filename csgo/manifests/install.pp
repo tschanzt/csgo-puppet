@@ -48,14 +48,14 @@ class csgo::install (
         strip_components => 1,
         extension => 'zip'
     }
-    exec {'mv csgo/pugsetup_2.0.5/cfg/* csgo/cfg/':
+    exec {'rsync -a csgo/pugsetup_2.0.5/cfg/* csgo/cfg/':
         path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
         require => Archive['pugsetup']
    }
 
-    exec {'mv csgo/pugsetup_2.0.5/addons/* csgo/addons/':
+    exec {'rsync -a csgo/pugsetup_2.0.5/addons/* csgo/addons/':
         path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
