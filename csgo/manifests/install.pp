@@ -32,7 +32,7 @@ class csgo::install (
     archive { 'sm':
         user => 'eevent',
         checksum => false,
-        target => "${game_directory}/csgo/addons",
+        target => "${game_directory}/csgo/",
         ensure => present,
         url => 'https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6259-linux.tar.gz',
         src_target => '/tmp',
