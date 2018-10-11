@@ -21,7 +21,7 @@ class csgo::install (
 	user => 'eevent',
 	require => Archive['cfg']
    }
-    archive { 'csay':
+    archive { 'sm':
         user => 'eevent',
         checksum => false,
         target => "${game_directory}/csgo/csgo",
@@ -30,7 +30,7 @@ class csgo::install (
         src_target => '/tmp',
         strip_components => 1,
     }
-    archive { 'csay':
+    archive { 'pugsetup':
         user => 'eevent',
         checksum => false,
         target => "${game_directory}/csgo/csgo",
@@ -59,7 +59,7 @@ class csgo::install (
 }
 
     $codefile = $::hostname?{
-    'CSGO-Switzerlan-5'=> file('csgo/eevent-csgo-1.txt'),
+    'csgo-switzerlan-5'=> file('csgo/eevent-csgo-1.txt'),
     'Switzerlan-csgo-6'=> file('csgo/eevent-csgo-2.txt'),
     'eevent1'=> file('csgo/eevent-csgo-3.txt'),
     'eevent2'=> file('csgo/eevent-csgo-4.txt'),
