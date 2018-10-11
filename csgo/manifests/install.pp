@@ -24,13 +24,22 @@ class csgo::install (
     archive { 'csay':
         user => 'eevent',
         checksum => false,
-        target => "${game_directory}/csgo/",
+        target => "${game_directory}/csgo/csgo",
         ensure => present,
-        url => 'http://www.esport-tools.net/download/CSay-CSGO.zip',
+        url => 'https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6259-linux.tar.gz',
         src_target => '/tmp',
-	extension => 'zip'
+        strip_components => 1,
     }
-
+    archive { 'csay':
+        user => 'eevent',
+        checksum => false,
+        target => "${game_directory}/csgo/csgo",
+        ensure => present,
+        url => 'https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip',
+        src_target => '/tmp',
+        strip_components => 1,
+        extension => 'zip'
+    }
     file {"${game_directory}/csgo/cfg/autoexec.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/autoexec.cfg'
@@ -50,8 +59,8 @@ class csgo::install (
 }
 
     $codefile = $::hostname?{
-    'eevent-dns-1'=> file('csgo/eevent-csgo-1.txt'),
-    'eevent-dns-2'=> file('csgo/eevent-csgo-2.txt'),
+    'CSGO-Switzerlan-5'=> file('csgo/eevent-csgo-1.txt'),
+    'Switzerlan-csgo-6'=> file('csgo/eevent-csgo-2.txt'),
     'eevent1'=> file('csgo/eevent-csgo-3.txt'),
     'eevent2'=> file('csgo/eevent-csgo-4.txt'),
     'eevent3'=> file('csgo/eevent-csgo-5.txt'),
