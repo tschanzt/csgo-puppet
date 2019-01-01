@@ -100,7 +100,13 @@ class csgo::install (
         $tvport = 27020 + (100*$instance)
         $clientport = 27005 + (100*$instance)
         $token = $codes[$instance]
-        file {"${base_dir}/csgoserver-${instance+1}.cfg":
+        if $instance == 0 {
+            $fname = csgoserver.cfg
+        }
+        else {
+            $fname = csgoserver-($instance+1).cfg
+        }
+        file {"${base_dir}/lgsm/config-lgsm/csgoserver/${fname}":
             content => template('csgo/csgoserver.cfg.erb'),
             owner => eevent,
             group => eevent,
