@@ -4,7 +4,9 @@ class csgo::install (
 	$game_type	= $::csgo::game_type,
 	$game_mode	= $::csgo::game_mode,
 	$mapgroup	= $::csgo::mapgroup,
-        $game_directory = "/home/eevent/csgo"
+    $game_directory = "/home/eevent/csgo/serverfiles"
+    $base_dir = "/home/eevent/csgo"
+
 	) {
     archive { 'cfg':
         user => 'eevent',
@@ -62,23 +64,25 @@ class csgo::install (
         require => Archive['pugsetup']
    }
 
-    file {"${game_directory}/csgo/cfg/autoexec.cfg":
-        replace => true,
-        source => 'puppet:///modules/csgo/autoexec.cfg'
-        }
-
     file {"${game_directory}/csgo/cfg/server.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/server.cfg'
         }
 
     file {"${game_directory}/set_prio.sh":
-	replace => true,
-	source => 'puppet:///modules/csgo/set_prio.sh',
-	owner => 'eevent',
-	group => 'eevent',
-	mode => '774'
-}
+    	replace => true,
+    	source => 'puppet:///modules/csgo/set_prio.sh',
+    	owner => 'eevent',
+    	group => 'eevent',
+    	mode => '774'
+    }
+    file {"${base_dir}/lgsm/config-lgsm/common.cfg":
+        replace => true,
+        source => 'puppet:///modules/csgo/common.cfg',
+        owner => 'eevent',
+        group => 'eevent',
+        mode => '774'
+    }
 
     $codefile = $::hostname?{
     'csgo-switzerlan-5'=> file('csgo/eevent-csgo-1.txt'),
@@ -94,19 +98,13 @@ class csgo::install (
     each($bla) |$instance| {
         $gameport = 27015 + (100*$instance)
         $tvport = 27020 + (100*$instance)
+        $clientport = 27005 + (100*$instance)
         $token = $codes[$instance]
-        file {"${game_directory}/start${instance}.sh":
-            content => template('csgo/start.sh.erb'),
+        file {"${base_dir}/csgoserver-${instance+1}.cfg":
+            content => template('csgo/csgoserver.cfg.erb'),
             owner => eevent,
             group => eevent,
             mode => '774',
         }
-        file {"${game_directory}/start-wingman${instance}.sh":
-            content => template('csgo/start_wingman.sh.erb'),
-            owner => eevent,
-            group => eevent,
-            mode => '774',
-        }
-
     }
 }
