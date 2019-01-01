@@ -105,7 +105,7 @@ class csgo::install (
         }
         else {
             $number = ($instance+1)
-            $fname = 'csgoserver-${number}.cfg'
+            $fname = "csgoserver-${number}.cfg"
         }
         file {"${base_dir}/lgsm/config-lgsm/csgoserver/${fname}":
             content => template('csgo/csgoserver.cfg.erb'),
