@@ -4,7 +4,7 @@ class csgo::install (
 	$game_type	= $::csgo::game_type,
 	$game_mode	= $::csgo::game_mode,
 	$mapgroup	= $::csgo::mapgroup,
-    $game_directory = "/home/eevent/csgo/serverfiles"
+    $game_directory = "/home/eevent/csgo/serverfiles",
     $base_dir = "/home/eevent/csgo"
 
 	) {
