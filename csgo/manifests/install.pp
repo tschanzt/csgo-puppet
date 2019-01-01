@@ -101,10 +101,11 @@ class csgo::install (
         $clientport = 27005 + (100*$instance)
         $token = $codes[$instance]
         if $instance == 0 {
-            $fname = csgoserver.cfg
+            $fname = 'csgoserver.cfg'
         }
         else {
-            $fname = csgoserver-($instance+1).cfg
+            $number = ($instance+1)
+            $fname = 'csgoserver-${number}.cfg'
         }
         file {"${base_dir}/lgsm/config-lgsm/csgoserver/${fname}":
             content => template('csgo/csgoserver.cfg.erb'),
