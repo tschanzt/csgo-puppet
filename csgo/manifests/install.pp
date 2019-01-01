@@ -64,9 +64,11 @@ class csgo::install (
         require => Archive['pugsetup']
    }
 
-    file {"${game_directory}/csgo/cfg/server.cfg":
+    file {"${base_dir}/lgsm/config-default/config-game/server.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/server.cfg'
+        owner => 'eevent',
+        group => 'eevent'
         }
 
     file {"${game_directory}/set_prio.sh":
@@ -76,7 +78,7 @@ class csgo::install (
     	group => 'eevent',
     	mode => '774'
     }
-    file {"${base_dir}/lgsm/config-lgsm/common.cfg":
+    file {"${base_dir}/lgsm/config-lgsm/csgoserver/common.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/common.cfg',
         owner => 'eevent',
