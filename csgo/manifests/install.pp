@@ -98,7 +98,7 @@ class csgo::install (
     each($bla) |$instance| {
         $gameport = 27015 + (100*$instance)
         $tvport = 27020 + (100*$instance)
-        $clientport = 27005 + (100*$instance)
+        $clport = 27005 + (100*$instance)
         $token = $codes[$instance]
         if $instance == 0 {
             $fname = 'csgoserver.cfg'
