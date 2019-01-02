@@ -64,12 +64,19 @@ class csgo::install (
         require => Archive['pugsetup']
    }
 
-    file {"${base_dir}/lgsm/config-default/config-game/server.cfg":
+    file {"${game_directory}/csgo/cfg/server.cfg":
         replace => true,
-        source => 'puppet:///modules/csgo/server.cfg'
+        source => 'puppet:///modules/csgo/server.cfg',
         owner => 'eevent',
         group => 'eevent'
         }
+
+    file {"${game_directory}/csgo/cfg/autoexec.cfg":
+        replace => true,
+        source => 'puppet:///modules/csgo/autoexec.cfg',
+        owner => 'eevent',
+        group => 'eevent'
+    }
 
     file {"${game_directory}/set_prio.sh":
     	replace => true,
@@ -88,7 +95,7 @@ class csgo::install (
 
     $codefile = $::hostname?{
     'csgo-switzerlan-5'=> file('csgo/eevent-csgo-1.txt'),
-    'switzerlan-csgo-6'=> file('csgo/eevent-csgo-2.txt'),
+    'eevent-exdns-1'=> file('csgo/eevent-csgo-2.txt'),
     'eevent1'=> file('csgo/eevent-csgo-3.txt'),
     'eevent2'=> file('csgo/eevent-csgo-4.txt'),
     'eevent3'=> file('csgo/eevent-csgo-5.txt'),
