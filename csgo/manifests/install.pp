@@ -94,10 +94,10 @@ class csgo::install (
     }
 
     $codefile = $::hostname?{
-    'csgo-switzerlan-5'=> file('csgo/eevent-csgo-1.txt'),
+    'eevent'=> file('csgo/eevent-csgo-1.txt'),
     'eevent-exdns-1'=> file('csgo/eevent-csgo-2.txt'),
     'eevent1'=> file('csgo/eevent-csgo-3.txt'),
-    'eevent2'=> file('csgo/eevent-csgo-4.txt'),
+    'eevent0'=> file('csgo/eevent-csgo-4.txt'),
     'eevent3'=> file('csgo/eevent-csgo-5.txt'),
     'eevent4'=> file('csgo/eevent-csgo-6.txt'),
 }
