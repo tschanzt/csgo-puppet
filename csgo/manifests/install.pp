@@ -118,6 +118,7 @@ class csgo::install (
         $tvport = 27020 + (100*$instance)
         $clport = 27005 + (100*$instance)
         $token = $codes[$instance]
+        $host = $::hostname
         if $instance == 0 {
             $fname = 'csgoserver.cfg'
         }
@@ -130,6 +131,13 @@ class csgo::install (
             owner => eevent,
             group => eevent,
             mode => '774',
+        }
+
+        file {"${game_directory}/csgo/cfg/${fname}":
+            content => template('csgo/csgoserver_csgo.cfg.erb'),
+            owner => eevent,
+            group => eevent,
+            replace => true,
         }
     }
 }

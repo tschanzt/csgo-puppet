@@ -1,3 +1,5 @@
+hostname ="<%= @host -%> <%= @instance -%>"
+
 // RCON - remote console password.
 rcon_password "maunidimmerdsgliche"
 
@@ -63,11 +65,3 @@ writeid
 
 // Write IP - Save the ban list to banned_ip.cfg.
 writeip
-
-mp_overtime_enable 1
-tv_delaymapchange 1
-sv_teamid_overhead_always_prohibit 1
-sv_show_team_equipment_prohibit 1
-mp_backup_round_file_pattern "%prefix%_%date%_%time%_%team1%_%team2%_%map%_round%round%_score_%score1%_%score2%.txt"
-sv_max_queries_sec 99999
-exec esl5on5
