@@ -50,20 +50,6 @@ class csgo::install (
         strip_components => 1,
         extension => 'zip'
     }
-    exec {'rsync -a csgo/pugsetup_2.0.5/cfg/* csgo/cfg/':
-        path => '/usr/bin:/usr/sbin:/bin',
-        cwd => $game_directory,
-        user => 'eevent',
-        require => Archive['pugsetup']
-   }
-
-    exec { 'rsync_pugsetup':
-        command => 'rsync -a csgo/pugsetup_2.0.5/addons/* csgo/addons/',
-        path => '/usr/bin:/usr/sbin:/bin',
-        cwd => $game_directory,
-        user => 'eevent',
-        require => Archive['pugsetup']
-   }
 
     file {"${game_directory}/csgo/cfg/server.cfg":
         replace => true,
@@ -99,7 +85,7 @@ class csgo::install (
         source => 'puppet:///modules/csgo/live.cfg',
         owner => 'eevent',
         group => 'eevent',
-        require => Exec['rsync_pugsetup'],
+        require => Archive['pugsetup'],
     }
 
     $codefile = $::hostname?{
