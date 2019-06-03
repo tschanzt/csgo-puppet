@@ -44,7 +44,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo",
         ensure => present,
-        url => 'https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip',
+        url => 'https://github.com/splewis/csgo-pug-setup/archive/master.zip',
         follow_redirects => true,
         src_target => '/tmp',
         strip_components => 1,
