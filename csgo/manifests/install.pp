@@ -44,7 +44,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo",
         ensure => present,
-        url => 'https://github.com/splewis/csgo-pug-setup/archive/master.zip',
+        url => 'https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip',
         follow_redirects => true,
         src_target => '/tmp',
         strip_components => 1,
@@ -83,6 +83,14 @@ class csgo::install (
     file {"${game_directory}/csgo/cfg/sourcemod/pugsetup/live.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/live.cfg',
+        owner => 'eevent',
+        group => 'eevent',
+        require => Archive['pugsetup'],
+    }
+
+    file {"${game_directory}/csgo/addons/sourcemod/configs/pugsetup/maps.txt":
+        replace => true,
+        source => 'puppet:///modules/csgo/maps.txt',
         owner => 'eevent',
         group => 'eevent',
         require => Archive['pugsetup'],
