@@ -33,6 +33,7 @@ class csgo::install (
     }
     archive { 'sm':
         user => 'eevent',
+        group => 'eevent',
         checksum => false,
         target => "${game_directory}/csgo/",
         ensure => present,
@@ -79,6 +80,17 @@ class csgo::install (
         mode => '774'
     }
 
+    exec {'chmod 777 csgo/cfg/get5/*':
+        cwd => $game_directory,
+        user => 'eevent',
+        require => Archive['get5']
+    }
+    exec {'chmod -R 777 csgo/addons/sourcemod/*':
+        cwd => $game_directory,
+        user => 'eevent',
+        require => Archive['get5']
+    }
+
     file {"${game_directory}/csgo/cfg/get5/live.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/live.cfg',
@@ -109,6 +121,40 @@ class csgo::install (
         owner => 'eevent',
         group => 'eevent',
         require => Archive['get5'],
+    }
+
+    archive { 'steamworks':
+        user => 'eevent',
+        checksum => false,
+        target => "${game_directory}/csgo",
+        ensure => present,
+        url => 'http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git131-linux.tar.gz',
+        follow_redirects => true,
+        src_target => '/tmp',
+        extension => 'zip'
+    }
+
+    archive { 'json':
+        user => 'eevent',
+        checksum => false,
+        target => "${game_directory}/csgo",
+        ensure => present,
+        url => 'https://github.com/clugg/sm-json/archive/v2.0.0.tar.gz',
+        strip-components => 1
+        follow_redirects => true,
+        src_target => '/tmp',
+        extension => 'zip'
+    }
+
+    exec {'mv csgo/addons/sourcemod/plugins/disabled/get5_apistats.smx csgo/addons/sourcemod/plugins/':
+        cwd => $game_directory,
+        user => 'eevent',
+        require => Archive['get5']
+    }
+    exec {'mkdir csgo/round_backups':
+        cwd => $game_directory,
+        user => 'eevent',
+        require => Archive['get5']
     }
 
     $codefile = $::hostname?{
