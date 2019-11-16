@@ -95,14 +95,6 @@ class csgo::install (
         require => Archive['get5'],
     }
 
-    file {"${game_directory}/csgo/addons/sourcemod/cfg/get5.cfg":
-        replace => true,
-        source => 'puppet:///modules/csgo/get5.cfg',
-        owner => 'eevent',
-        group => 'eevent',
-        require => Archive['get5'],
-    }
-
     file {"${game_directory}/csgo/bo1.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/bo1.cfg',
