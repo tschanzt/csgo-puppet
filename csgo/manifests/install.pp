@@ -28,7 +28,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo/",
         ensure => present,
-        url => 'https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git966-linux.tar.gz',
+        url => 'https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz',
         src_target => '/tmp',
     }
     archive { 'sm':
@@ -36,7 +36,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo/",
         ensure => present,
-        url => 'https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6259-linux.tar.gz',
+        url => 'https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6454-linux.tar.gz',
         src_target => '/tmp',
     }
     archive { 'get5':
@@ -79,7 +79,7 @@ class csgo::install (
         mode => '774'
     }
 
-    file {"${game_directory}/csgo/cfg/sourcemod/get5/live.cfg":
+    file {"${game_directory}/csgo/cfg/get5/live.cfg":
         replace => true,
         source => 'puppet:///modules/csgo/live.cfg',
         owner => 'eevent',
