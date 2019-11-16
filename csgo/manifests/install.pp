@@ -132,7 +132,6 @@ class csgo::install (
         url => 'http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git131-linux.tar.gz',
         follow_redirects => true,
         src_target => '/tmp',
-        extension => 'zip'
     }
 
     archive { 'json':
@@ -144,7 +143,6 @@ class csgo::install (
         strip_components => 1,
         follow_redirects => true,
         src_target => '/tmp',
-        extension => 'zip'
     }
 
     exec {'mv csgo/addons/sourcemod/plugins/disabled/get5_apistats.smx csgo/addons/sourcemod/plugins/':
