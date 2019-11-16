@@ -33,7 +33,6 @@ class csgo::install (
     }
     archive { 'sm':
         user => 'eevent',
-        group => 'eevent',
         checksum => false,
         target => "${game_directory}/csgo/",
         ensure => present,
