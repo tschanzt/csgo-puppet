@@ -80,11 +80,13 @@ class csgo::install (
     }
 
     exec {'chmod 777 csgo/cfg/get5/*':
+        path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
         require => Archive['get5']
     }
     exec {'chmod -R 777 csgo/addons/sourcemod/*':
+        path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
         require => Archive['get5']
@@ -146,11 +148,13 @@ class csgo::install (
     }
 
     exec {'mv csgo/addons/sourcemod/plugins/disabled/get5_apistats.smx csgo/addons/sourcemod/plugins/':
+        path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
         require => Archive['get5']
     }
     exec {'mkdir csgo/round_backups':
+        path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
         require => Archive['get5']
