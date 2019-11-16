@@ -140,7 +140,7 @@ class csgo::install (
         target => "${game_directory}/csgo",
         ensure => present,
         url => 'https://github.com/clugg/sm-json/archive/v2.0.0.tar.gz',
-        strip-components => 1
+        strip_components => 1,
         follow_redirects => true,
         src_target => '/tmp',
         extension => 'zip'
