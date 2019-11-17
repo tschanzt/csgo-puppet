@@ -79,7 +79,7 @@ class csgo::install (
         mode => '774'
     }
 
-    exec {'chmod 777 csgo/cfg/get5/*':
+    exec {'chmod -R 777 csgo/cfg/get5':
         path => '/usr/bin:/usr/sbin:/bin',
         cwd => $game_directory,
         user => 'eevent',
