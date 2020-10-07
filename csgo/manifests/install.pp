@@ -8,21 +8,18 @@ class csgo::install (
     $base_dir = "/home/eevent/csgo"
 
 	) {
-    archive { 'cfg':
-        user => 'eevent',
-        checksum => false,
-        target => "${game_directory}/csgo/cfg",
-        ensure => present,
-        url => 'https://gfx.esl.eu/media/counterstrike/csgo/downloads/configs/csgo_esl_serverconfig.zip',
-        src_target => '/tmp',
-	extension => 'zip'
+    file {"${game_directory}/csgo/cfg/esl5on5.cfg":
+        replace => true,
+        source => 'puppet:///modules/csgo/esl5on5.cfg',
+        owner => 'eevent',
+        group => 'eevent',
     }
-    exec {'mv csgo/cfg/csgo_esl_serverconfig/* csgo/cfg/':
-	path => '/usr/bin:/usr/sbin:/bin',
-	cwd => $game_directory,
-	user => 'eevent',
-	require => Archive['cfg']
-   }
+    file {"${game_directory}/csgo/cfg/eslgotv.cfg":
+        replace => true,
+        source => 'puppet:///modules/csgo/eslgotv.cfg',
+        owner => 'eevent',
+        group => 'eevent',
+    }
     archive { 'metamod':
         user => 'eevent',
         checksum => false,
@@ -44,7 +41,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo",
         ensure => present,
-        url => 'hhttps://ci.splewis.net/job/get5/lastSuccessfulBuild/artifact/builds/get5/get5-502.zip',
+        url => 'https://ci.splewis.net/job/get5/lastSuccessfulBuild/artifact/builds/get5/get5-502.zip',
         follow_redirects => true,
         src_target => '/tmp',
         extension => 'zip'
