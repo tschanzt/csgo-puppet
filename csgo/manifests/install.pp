@@ -44,7 +44,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo",
         ensure => present,
-        url => 'https://github.com/splewis/get5/releases/download/0.7.1/get5_0.7.1.zip',
+        url => 'hhttps://ci.splewis.net/job/get5/lastSuccessfulBuild/artifact/builds/get5/get5-502.zip',
         follow_redirects => true,
         src_target => '/tmp',
         extension => 'zip'
@@ -129,7 +129,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo",
         ensure => present,
-        url => 'http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git131-linux.tar.gz',
+        url => 'https://github.com/KyleSanderson/SteamWorks/releases/download/1.2.3c/package-lin.tgz',
         follow_redirects => true,
         src_target => '/tmp',
     }
@@ -159,10 +159,10 @@ class csgo::install (
     }
 
     $codefile = $::hostname?{
-    'eevent1'=> file('csgo/eevent-csgo-1.txt'),
-    'eevent2'=> file('csgo/eevent-csgo-2.txt'),
-    'eevent3'=> file('csgo/eevent-csgo-3.txt'),
-    'eevent4'=> file('csgo/eevent-csgo-4.txt'),
+    'server2'=> file('csgo/eevent-csgo-1.txt'),
+    'server3'=> file('csgo/eevent-csgo-2.txt'),
+    'server4'=> file('csgo/eevent-csgo-3.txt'),
+    'server5'=> file('csgo/eevent-csgo-4.txt'),
     'eevent5'=> file('csgo/eevent-csgo-5.txt'),
     'eevent6'=> file('csgo/eevent-csgo-6.txt'),
 }
