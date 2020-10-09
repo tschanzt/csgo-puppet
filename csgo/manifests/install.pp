@@ -126,7 +126,7 @@ class csgo::install (
         checksum => false,
         target => "${game_directory}/csgo",
         ensure => present,
-        url => 'https://github.com/KyleSanderson/SteamWorks/releases/download/1.2.3c/package-lin.tgz',
+        url => 'http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git131-linux.tar.gz',
         follow_redirects => true,
         src_target => '/tmp',
     }
